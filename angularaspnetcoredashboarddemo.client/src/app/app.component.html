@@ -1,0 +1,79 @@
+<div>
+  <div>
+    <h3>Interactive map using crop, disaster designation, and USFS fire occurance data from USDA at the state/county level.</h3>
+  </div>
+</div>
+
+<p *ngIf="!type">Loading Map Layers... Refresh when ASP.NET C# backend starts.</p>
+
+<div *ngIf="type" style="margin:10px">
+  <button class="button" style="margin-right:10px" role="button" (click)="updateType('ussec', year)">US Secretary of Agriculture</button>
+  <button class="button" role="button" (click)="updateType('pres', year)">Presidential Declarations</button>
+</div>
+
+<div *ngIf="type" class="container">
+  <ul>
+    <li>
+      <a [ngClass]="year === '2021' ? 'active nav-link' : 'nav-link'" [routerLink]="" (click)="updateType(type, '2021')">
+        2021
+      </a>
+    </li>
+    <li>
+      <a [ngClass]="year === '2022' ? 'active nav-link' : 'nav-link'" [routerLink]="" (click)="updateType(type, '2022')">
+        2022
+      </a>
+    </li>
+    <li>
+      <a [ngClass]="year === '2023' ? 'active nav-link' : 'nav-link'" [routerLink]="" (click)="updateType(type, '2023')">
+        2023
+      </a>
+    </li>
+    <li>
+      <a [ngClass]="year === '2024' ? 'active nav-link' : 'nav-link'" [routerLink]="" (click)="updateType(type, '2024')">
+        2024
+      </a>
+    </li>
+    <li>
+      <a [ngClass]="year === '2025' ? 'active nav-link' : 'nav-link'" [routerLink]="" (click)="updateType(type, '2025')">
+        2025
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div style="padding-top:20px;">
+  <div id="map" style="height: 500px;width: 100%;"></div>
+</div>
+
+
+<div *ngIf="type" class="map-detail-list">
+  <div>
+    <ul>
+      <li>Use the layer option to toggle between state/county level details or change the base layer.</li>
+      <li>Use Presidential Emergency Declarations/US Secretary of Ag buttons to toggle data in map.</li>
+      <li>Click on the states/counties to see details. <b>Note:</b> Defaults to county as the primary layer, use layer option to toggle.</li>
+      <li>Use the year links to update the map year data set.</li>
+      <li>Points represent ignition or origin from which the individual USFS wildland fires started by year. <b>Note:</b> Until full dataset is out for year 2025, the 2024 data will show when 2025 year is selected. </li>
+      <li>
+        Data sources used to create GeoJson for map:
+        <ul>
+          <li>
+            <a target="_blank" href="https://www.fsa.usda.gov/resources/disaster-assistance-program/disaster-designation-information">
+              USDA Disaster Designation Information
+            </a>
+          </li>
+          <li>
+            <a target="_blank" href="https://quickstats.nass.usda.gov/">
+              USDA Quick Stats Census
+            </a>
+          </li>
+          <li>
+            <a target="_blank" href="https://catalog.data.gov/dataset/national-usfs-fire-occurrence-point-feature-layer-d3233">
+              National USFS Fire Occurrence Point
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
