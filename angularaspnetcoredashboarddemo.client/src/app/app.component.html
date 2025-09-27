@@ -7,8 +7,8 @@
 <p *ngIf="!type">Loading Map Layers... Refresh when ASP.NET C# backend starts.</p>
 
 <div *ngIf="type" style="margin:10px">
-  <button class="button" style="margin-right:10px" role="button" (click)="updateType('ussec', year)">US Secretary of Agriculture</button>
-  <button class="button" role="button" (click)="updateType('pres', year)">Presidential Declarations</button>
+  <button [ngClass]="type === 'ussec' ? 'btn btn-success btn-sm m-2 btn-MapSelected' : 'btn btn-success btn-sm m-2'" style="margin-right:10px" role="button" (click)="updateType('ussec', year)">US Secretary of Agriculture</button>
+  <button [ngClass]="type === 'pres' ? 'btn btn-success btn-sm m-2 btn-MapSelected' : 'btn btn-success btn-sm m-2'" role="button" (click)="updateType('pres', year)">Presidential Declarations</button>
 </div>
 
 <div *ngIf="type" class="container">

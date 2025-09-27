@@ -61,21 +61,21 @@ export class AppComponent implements OnInit {
   }
 
   getStateStyle(feature: any) {
-    const currentInterval = 2;
-    const value = (feature.properties ? feature.properties.TotalPresDecs : 0) * currentInterval;
+    const currentInterval = 5;
+    const value = (feature.properties ? feature.properties.TotalPresDecs : 0);
     let fillColor;
 
-    if (value >= 4 * currentInterval) {
+    if (value >= (4 * currentInterval)) {
       fillColor = '#011a08';
     }
-    else if (value > 3 * currentInterval) {
+    else if (value > (3 * currentInterval)) {
       fillColor = '#3d9137';
     }
-    else if (value > 2 * currentInterval)
+    else if (value > (2 * currentInterval))
     {
       fillColor = '#88d669';
     }
-    else if (value > 1 * currentInterval) {
+    else if (value > (1 * currentInterval)) {
       fillColor = '#b2ed9a';
     }
     else {
@@ -114,6 +114,8 @@ export class AppComponent implements OnInit {
       fillOpacity: 0.7
     };
   }
+
+
 
   private loadGeoJSON(stateJson: any, countyJson: any, fireJson: any): void {
     const worldImagery = 'https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
@@ -181,8 +183,6 @@ export class AppComponent implements OnInit {
       },
     })
 
-
-
     stateLayer.setStyle(this.getStateStyle);
     stateLayer.addTo(this.map);
     countyLayer.setStyle(this.getCountyStyle);
@@ -203,6 +203,47 @@ export class AppComponent implements OnInit {
 
     const layerControl = L.control.layers(baseMaps, overlayMaps);
     layerControl.addTo(this.map);
+
+
+
+      const legend = new (L.Control.extend({
+        options: {
+          position: 'bottomright' // or 'topright', 'bottomleft', 'topleft'
+        },
+        onAdd: function (map: any) {
+
+          const currentInterval = 5;
+          var div = L.DomUtil.create('div', 'info legend'),
+            grades = [(1 * currentInterval), (2 * currentInterval), (3 * currentInterval), (4 * currentInterval)],
+            labels = [];
+
+          div.innerHTML += '<div>State Disasters</div>'
+
+          for (var i = 0; i < grades.length; i++) {
+            let d = grades[i] + 1;
+            let color = d >= (4 * currentInterval) ? '#011a08' :
+              d > (3 * currentInterval) ? '#3d9137' :
+                d > (2 * currentInterval) ? '#88d669' :
+                  (d > (1 * currentInterval) || d > 0) ? '#b2ed9a' :
+                    '#FFFFFF00'; 
+            div.innerHTML +=
+              '<i style="background:' + color + '"></i> ' +
+            grades[i] + (grades[i + 1] ? (currentInterval > 1 ? (' - ' + (grades[i + 1] - 1)) : '') + '<br>' : '+');
+          }
+
+          div.innerHTML += '<div style="padding-top:10px;">County Level (2022 Census)</div>';
+          div.innerHTML += '<i style="background:red"></i>Crop Production <br>';
+          div.innerHTML += '<i style="background:#5E87E8"></i>No Crop Production<br>';
+
+          div.innerHTML += '<div class="row mt-2"> <div class="col-2"><div class="circle"></div></div> <div class="col-10">USFS Fire Orgins</div> </div>'
+
+          return div;
+        }
+      }));
+
+    this.map.addControl(legend);
+
+    
 
   }
 
