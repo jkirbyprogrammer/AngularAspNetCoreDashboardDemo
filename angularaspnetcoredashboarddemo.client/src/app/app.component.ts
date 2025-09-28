@@ -75,7 +75,7 @@ export class AppComponent implements OnInit {
     {
       fillColor = '#88d669';
     }
-    else if (value > (1 * currentInterval)) {
+    else if (value > 0) {
       fillColor = '#b2ed9a';
     }
     else {
@@ -214,7 +214,7 @@ export class AppComponent implements OnInit {
 
           const currentInterval = 5;
           var div = L.DomUtil.create('div', 'info legend'),
-            grades = [(1 * currentInterval), (2 * currentInterval), (3 * currentInterval), (4 * currentInterval)],
+            grades = [1, (2 * currentInterval), (3 * currentInterval), (4 * currentInterval)],
             labels = [];
 
           div.innerHTML += '<div>State Disasters</div>'
