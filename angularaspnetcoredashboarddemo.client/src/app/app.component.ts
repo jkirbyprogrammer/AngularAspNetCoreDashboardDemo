@@ -208,7 +208,7 @@ export class AppComponent implements OnInit {
 
       const legend = new (L.Control.extend({
         options: {
-          position: 'bottomright' // or 'topright', 'bottomleft', 'topleft'
+          position: 'bottomleft' // or 'topright', 'bottomleft', 'topleft'
         },
         onAdd: function (map: any) {
 
