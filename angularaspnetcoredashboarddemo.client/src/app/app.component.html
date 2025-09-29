@@ -4,13 +4,16 @@
   </div>
 </div>
 
+<!--Show loading message if map type is not set-->
 <p *ngIf="!type">Loading Map Layers... Refresh when ASP.NET C# backend starts.</p>
 
+<!--Show buttons and map if map type is set-->
 <div *ngIf="type" style="margin:10px">
   <button [ngClass]="type === 'ussec' ? 'btn btn-success btn-sm m-2 btn-MapSelected' : 'btn btn-success btn-sm m-2'" style="margin-right:10px" role="button" (click)="updateType('ussec', year)">US Secretary of Agriculture</button>
   <button [ngClass]="type === 'pres' ? 'btn btn-success btn-sm m-2 btn-MapSelected' : 'btn btn-success btn-sm m-2'" role="button" (click)="updateType('pres', year)">Presidential Declarations</button>
 </div>
 
+<!--Year selection links-->
 <div *ngIf="type" class="container">
   <ul>
     <li>
@@ -41,11 +44,12 @@
   </ul>
 </div>
 
+<!--Map container-->
 <div style="padding-top:20px;">
   <div id="map" style="height: 500px;width: 100%;"></div>
 </div>
 
-
+<!--Show map details and instructions if map type is set-->
 <div *ngIf="type" class="map-detail-list">
   <div>
     <ul>
