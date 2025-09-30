@@ -41,9 +41,9 @@ export class AppComponent implements OnInit {
 
 
     // Use forkJoin to wait for all requests to complete
-    forkJoin([requestState, requestCounty, requestFirePoints]).subscribe(
-      // Destructure the results into individual variables
-      ([dataState, dataCounty, dataFire]) => {
+    forkJoin([requestState, requestCounty, requestFirePoints]).subscribe({
+      // Destructure the results into individual variables, make sure to use next, and error for subscribe.
+      next: ([dataState, dataCounty, dataFire]) => {
         // All requests have completed, and their results are available here
         console.log('Data from request state geoJson:', dataState);
         console.log('Data from request county geoJson:', dataCounty);
@@ -53,10 +53,10 @@ export class AppComponent implements OnInit {
         this.initMap(dataState, dataCounty, dataFire);
       },
       // Handle errors if any of the requests fail
-      error => {
-        console.error('Error fetching data for map layers:', error);
-      }
-    );
+      error: (error) => {
+      console.error('Error fetching data for map layers:', error);
+    }
+    });
   }
 
   // Title for the component
