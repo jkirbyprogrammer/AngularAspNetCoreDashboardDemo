@@ -23,14 +23,23 @@ namespace AngularAspNetCoreDashboardDemo.Server
             using StreamReader countySr = new(_filePath);
             // Read the entire file content
             string jsonCountyResults = countySr.ReadToEnd();
-            // Parse the GeoJSON content
-            GeoJsonReader reader = new GeoJsonReader();
-            // Convert to FeatureCollection
-            FeatureCollection featureCollection = reader.Read<FeatureCollection>(jsonCountyResults);
-            // Serialize FeatureCollection back to JSON string
-            string jsonString = JsonConvert.SerializeObject(featureCollection);
 
-            return jsonString;
+            ////Example: If you need to make changes to a geojson properties, use code below as guide to parse into feature Collection...
+            //GeoJsonReader reader = new GeoJsonReader();
+            //FeatureCollection featureCollection = reader.Read<FeatureCollection>(jsonCountyResults);
+            //foreach (var feature in featureCollection.Features)
+            //{
+            //    // Example modification: Add a new property to each feature
+            //    var propValue = 301;
+            //    feature.Properties["TestPropValue"] = propValue;
+            //}   
+
+            //string jsonString = JsonConvert.SerializeObject(featureCollection);
+
+            //return jsonString;
+            ////End of Example
+
+            return jsonCountyResults;
         }
 
     }

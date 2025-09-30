@@ -34,9 +34,11 @@ export class AppComponent implements OnInit {
 
   // Method to fetch GeoJSON data based on type and year
   getGeoJsonData(clickType: string, clickYear: string): void {
+    //use this to pull the files from the API for production
     const requestState = this.http.get<any>('/maplayers?layer=state&year=' + clickYear + '&type=' + clickType);
     const requestCounty = this.http.get<any>('/maplayers?layer=county&year=' + clickYear + '&type=' + clickType);
     const requestFirePoints = this.http.get<any>('/maplayers?layer=fire&year=' + clickYear + '&type=' + clickType);
+
 
     // Use forkJoin to wait for all requests to complete
     forkJoin([requestState, requestCounty, requestFirePoints]).subscribe(
