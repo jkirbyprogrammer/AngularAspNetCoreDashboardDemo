@@ -4,7 +4,7 @@ Interactive Leaflet map example using Angular for client side and C# ASP.NET Cor
   - https://www.fsa.usda.gov/resources/disaster-assistance-program/disaster-designation-information
   - USDA quick stats
 - I have Angular client and ASP.NET C# server applications hosted on Azure, public link below: 
-  - [Link to Angular Leaflet Map](https://angularleaflet-ccevacg7gvf7hvg6.centralus-01.azurewebsites.net/) 
+  - [Link to Angular Leaflet Map](https://mango-flower-0bdde0610.2.azurestaticapps.net/) 
 - Application Details:
   - Client Side (Angular)
     - Angular v19.2.0
